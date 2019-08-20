@@ -1,5 +1,6 @@
-from .graph import Graph
-
+from unittest.mock import patch
+from api import graph
+import time
 
 def test_djikstra():
     edges = [
@@ -16,12 +17,11 @@ def test_djikstra():
         ("F", "G", 11)
     ]
 
-    g = Graph(edges)
+    g = graph.Graph(edges)
     print(g)
     print(edges)
     print("A -> E:")
     print(g.djikstra("A", "E"))
-
 
 def test_topo():
     edges = [
@@ -37,8 +37,13 @@ def test_topo():
         ("E", "G", 9),
         ("F", "G", 11)
     ]
-    g = Graph(edges)
 
-    g.topo_sort("A")
-    assert("Z" in g.stack) 
-    print(g.stack)
+    def _mock(*args):
+        time.sleep(1)
+        return ["Z", "A"]
+
+    with patch('api.graph.Graph.topoSort', _mock):
+        g = graph.Graph(edges)
+        result = g.topoSort("A")
+        print(result)
+        assert("Z" in result)

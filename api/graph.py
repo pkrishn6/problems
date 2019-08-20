@@ -54,7 +54,7 @@ class Graph:
             return False
         return True
 
-    def topoSort(self):
+    def topoSort(self, start=None):
         WHITE, GRAY, BLACK = 0, 1, 2
         colors = defaultdict(int)
         topo_stack = []
@@ -71,6 +71,11 @@ class Graph:
             colors[node] = BLACK
             topo_stack.append(node)
             return True
+
+        if start:
+            if not dfs(start):
+                return []
+            return topo_stack
 
         for node in self.graph.keys():
             print("Topo of node", node)
