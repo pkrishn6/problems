@@ -1,0 +1,11 @@
+5 5
+3 3 E
+MMRMMRMRRM
+########
+5 5
+6 6 N
+LMLMLMLMM
+########
+5 5
+1 4 N
+LMLMLMLMM
