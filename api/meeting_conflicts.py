@@ -26,8 +26,7 @@ class Node:
             print("Interval %d:%d conflicts with %d:%d" % (start, end, root.start, root.end))
         if root.left and start <= root.left.max:
             self.overlap(root.left, start, end)
-        else:
-             self.overlap(root.right, start, end)
+        self.overlap(root.right, start, end)
 
 def overlapIntervals(intervals):
         if not intervals:
